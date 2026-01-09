@@ -1,0 +1,19 @@
+But du jeu :
+L'orc a plusieurs blessures, le but est de les soigner.
+
+Les blessures sont générées aléatoirement.
+Types de blessures :
+- Marque rouge, il faut la frapper avec un marteau
+- Une marque bleu, à soigner avec un sort => Faire 2 sorts
+- L'électriser s'il fait une crise d'épilepsie ?
+
+P'tit robot pour les voix ? Pas trop de sens dans un cadre fantastique ?
+
+# ROADMAP
+
+Ajouter le nouveau modèle (avec animation de base ?)
+Ajouter un sort.
+
+# REQUIS
+
+Une animation à la main.
