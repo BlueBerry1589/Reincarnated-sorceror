@@ -9,17 +9,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ShowCenterOfMass : MonoBehaviour
 {
-    private Rigidbody rb;
-    
-    void Start()
+    private Rigidbody _rb;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
-        if (rb == null) return;
+        if (_rb == null) return;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.TransformPoint(rb.centerOfMass), 0.02f);
+        Gizmos.DrawSphere(transform.TransformPoint(_rb.centerOfMass), 0.02f);
     }
 }

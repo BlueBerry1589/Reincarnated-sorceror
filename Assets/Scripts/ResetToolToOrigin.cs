@@ -20,8 +20,8 @@ public class ResetToolToOrigin : MonoBehaviour
     
     [Header("Settings")]
     public float returnDuration = 0.5f;
-    
-    void Start()
+
+    private void Start()
     {
         _startPosition = transform.position;
         _startRotation = transform.rotation;
@@ -31,12 +31,12 @@ public class ResetToolToOrigin : MonoBehaviour
         _interactable.selectExited.AddListener(OnSelectExit);
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         _interactable.selectExited.RemoveListener(OnSelectExit);
     }
 
-    void OnSelectExit(SelectExitEventArgs args)
+    private void OnSelectExit(SelectExitEventArgs args)
     {
         if (!_isReturning)
         {
@@ -47,7 +47,7 @@ public class ResetToolToOrigin : MonoBehaviour
     }
 
     // Le retour au point de départ se fait par interpolation de la position et de la rotation de l'outil.
-    IEnumerator ReturnRoutine()
+    private IEnumerator ReturnRoutine()
     {
         _isReturning = true;
         

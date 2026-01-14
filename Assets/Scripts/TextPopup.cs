@@ -4,8 +4,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class VRTextPopup : MonoBehaviour
 {
     public GameObject infoCanvas; // Sera assigné depuis l'éditeur
-    
-    void Awake()
+
+    private void Awake()
     {
         infoCanvas.SetActive(false);
         
