@@ -71,7 +71,7 @@ public class ResetToolToOrigin : MonoBehaviour
         transform.rotation = _startRotation;
         
         // Important sinon la baguette se met à rouler.
-        _rb.velocity = Vector3.zero;
+        //_rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
 
         _isReturning = false;

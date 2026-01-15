@@ -9,12 +9,12 @@ using UnityEngine;
 public class HitTarget : MonoBehaviour
 {
     public Renderer targetRenderer;
-    public TargetManager manager;
+    public GameEventManager manager;
 
     private AudioSource _audioSource;
     private bool _isActive;
 
-    public void SetActiveTarget(bool state)
+    public void SetActive(bool state)
     {
         _isActive = state;
         GetComponent<Collider>().enabled = state;
@@ -30,7 +30,7 @@ public class HitTarget : MonoBehaviour
     {
         if (_isActive && other.CompareTag("Hammer"))
         {
-            manager.ActivateRandomTarget();
+            manager.TriggerRandomEvent();
             _audioSource.Play();
         }
     }

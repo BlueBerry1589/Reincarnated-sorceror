@@ -12,23 +12,28 @@ public class TargetManager : MonoBehaviour
     private HitTarget _currentTarget;
     private int _index = -1;
 
-    private void Start()
+    // Awake est appelé avant Start.
+    // Si on restait sur Start, la méthode Start de GameEventManager serait appelée en premier,
+    // et donc Start ici remettrait les cibles inactives, entraînant un soft-lock.
+    private void Awake()
     {
         foreach (var target in targets)
         {
-            target.SetActiveTarget(false);
+            target.SetActive(false);
         }
+    }
 
-        ActivateRandomTarget();
+    public void DisableCurrentTarget()
+    {
+        if (_currentTarget != null)
+        {
+            _currentTarget.SetActive(false);
+        }
     }
 
     public void ActivateRandomTarget()
     {
         if (targets.Count == 0) return;
-        if (_currentTarget != null)
-        {
-            _currentTarget.SetActiveTarget(false);
-        }
 
         // On veut une cible différente à chaque fois
         int randomIndex;
@@ -37,8 +42,9 @@ public class TargetManager : MonoBehaviour
             randomIndex = Random.Range(0, targets.Count);
         } while (randomIndex == _index);
         
+        
         _index = randomIndex;
         _currentTarget = targets[_index];
-        _currentTarget.SetActiveTarget(true);
+        _currentTarget.SetActive(true);
     }
 }
