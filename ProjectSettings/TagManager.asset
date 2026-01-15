@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hammer
+  - LeftHand
   layers:
   - Default
   - TransparentFX
