@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 75898242}
   - component: {fileID: 75898240}
   - component: {fileID: 75898243}
+  - component: {fileID: 75898244}
   m_Layer: 5
   m_Name: IconeSudation
   m_TagString: Untagged
@@ -636,6 +637,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.45
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &75898244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75898236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9056604, b: 0.88494855, a: 0.5}
+  m_EffectDistance: {x: 0.05, y: 0.05}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &199959678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4757,6 +4773,7 @@ GameObject:
   - component: {fileID: 1820535658}
   - component: {fileID: 1820535656}
   - component: {fileID: 1820535659}
+  - component: {fileID: 1820535660}
   m_Layer: 5
   m_Name: IconeElectrisation
   m_TagString: Untagged
@@ -4958,6 +4975,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.45
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1820535660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820535652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9056604, b: 0.88494855, a: 0.5}
+  m_EffectDistance: {x: 0.05, y: 0.05}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &1880687704
 PrefabInstance:
   m_ObjectHideFlags: 0
