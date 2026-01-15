@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRenderer: {fileID: 1079779497}
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  manager: {fileID: 484447296}
 --- !u!82 &33441899
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3876,7 +3876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRenderer: {fileID: 2128627249}
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  manager: {fileID: 484447296}
 --- !u!82 &1661670275
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4212,7 +4212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRenderer: {fileID: 727175288}
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  manager: {fileID: 484447296}
 --- !u!54 &1751727875
 Rigidbody:
   m_ObjectHideFlags: 0

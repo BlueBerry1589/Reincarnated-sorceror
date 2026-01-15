@@ -8,22 +8,11 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource), typeof(Collider))]
 public class HitTarget : MonoBehaviour
 {
-    // Les comparaisons par Tag calcule l'id de la chaîne passée en paramètre.
-    // Remplacer ce paramètre par son id nous épargne ces calculs.
-    private static readonly int Color1 = Shader.PropertyToID("_Color");
-    // public float hitForceThreshold = 1.5f;
-
     public Renderer targetRenderer;
-    public Color hitColor = Color.red;
-    private Color _normalColor;
+    public TargetManager manager;
 
     private AudioSource _audioSource;
     private bool _isActive;
-    
-    public bool IsActive()
-    {
-        return _isActive;
-    }
 
     public void SetActiveTarget(bool state)
     {
@@ -35,25 +24,14 @@ public class HitTarget : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        _normalColor = targetRenderer.material.GetColor(Color1);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isActive) return;
-
-        if (other.CompareTag("Hammer"))
+        if (_isActive && other.CompareTag("Hammer"))
         {
-            targetRenderer.material.SetColor(Color1, hitColor);
+            manager.ActivateRandomTarget();
             _audioSource.Play();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Hammer"))
-        {
-            targetRenderer.material.SetColor(Color1, _normalColor);
         }
     }
 }

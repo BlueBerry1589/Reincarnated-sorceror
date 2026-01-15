@@ -1,13 +1,18 @@
+/*
+ * TargetManager.cs
+ * Permet d'instancier une cible différente et aléatoire.
+ */
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetManager : MonoBehaviour
 {
-    public List<HitTarget> targets = new List<HitTarget>();
+    public List<HitTarget> targets = new();
     private HitTarget _currentTarget;
-    private int index = -1;
+    private int _index = -1;
 
-    void Start()
+    private void Start()
     {
         foreach (var target in targets)
         {
@@ -25,12 +30,15 @@ public class TargetManager : MonoBehaviour
             _currentTarget.SetActiveTarget(false);
         }
 
+        // On veut une cible différente à chaque fois
         int randomIndex;
         do
         {
             randomIndex = Random.Range(0, targets.Count);
-        } while (randomIndex == index);
-        _currentTarget = targets[Random.Range(0, targets.Count)];
+        } while (randomIndex == _index);
+        
+        _index = randomIndex;
+        _currentTarget = targets[_index];
         _currentTarget.SetActiveTarget(true);
     }
 }
