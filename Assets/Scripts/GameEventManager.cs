@@ -16,9 +16,6 @@ public class GameEventManager : MonoBehaviour
     [SerializeField]
     private Animator mascotAnimator;
 
-    [SerializeField, Range(0f, 1f)]
-    private float spawnTargetChance = 0.7f;
-
     private void Start()
     {
         TriggerRandomEvent();
