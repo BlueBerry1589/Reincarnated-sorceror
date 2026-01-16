@@ -3,6 +3,7 @@
  * Permet de sélectionner un sort.
  */
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -12,18 +13,15 @@ public class IconHoverColor : MonoBehaviour
 {
     [SerializeField] private AudioSource hoverSource;
     [SerializeField] private AudioSource selectSource;
-    private Outline _outline;
 
-    private readonly Color _selectColor = Color.red;
-    private Color _baseOutlineColor;
-    private Image _image;
+    private Outline _outline;
+    private GameObject _canvas;
 
     private void Awake()
     {
         _outline = GetComponent<Outline>();
         _outline.enabled = false;
-        _baseOutlineColor = _outline.effectColor;
-        _image = GetComponent<Image>();
+        _canvas = transform.parent.gameObject;
 
         var interactable = GetComponent<XRBaseInteractable>();
         interactable.hoverEntered.AddListener(OnHoverEnter);
@@ -31,25 +29,24 @@ public class IconHoverColor : MonoBehaviour
 
         // activated = quand on appuie sur la gâchette
         interactable.activated.AddListener(OnActivation);
-        interactable.deactivated.AddListener(OnDeactivation);
     }
 
     private void OnHoverEnter(HoverEnterEventArgs args)
     {
-        _outline.enabled = true;
         hoverSource.Play();
+        _outline.enabled = true;
     }
 
-    private void OnActivation(ActivateEventArgs arg0)
+    private void OnActivation(ActivateEventArgs args)
     {
-        _outline.effectColor = _selectColor;
-        _image.color = _selectColor;
         selectSource.Play();
+        // On veut que le canvas disparaisse *après* que le son se soit fini de jouer
+        StartCoroutine(DisabledAfterSoundEnds());
     }
-    
-    private void OnDeactivation(DeactivateEventArgs arg0)
+
+    private IEnumerator DisabledAfterSoundEnds()
     {
-        _outline.effectColor = _baseOutlineColor;
-        _image.color = Color.white;
+        yield return new WaitForSeconds(selectSource.clip.length);
+        _canvas.SetActive(false);
     }
 }
