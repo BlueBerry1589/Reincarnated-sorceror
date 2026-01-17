@@ -10,22 +10,25 @@ public class GameEventManager : MonoBehaviour
         CauseShaking,
         CauseSweating,
     }
-    
-    [SerializeField]
-    private TargetManager targetManager;
-    [SerializeField]
-    private Animator mascotAnimator;
+
+    [SerializeField] private TargetManager targetManager;
+    [SerializeField] private Animator mascotAnimator;
+
+    private EventKind? _previousEvent;
 
     private void Start()
     {
+        //TriggerShakingEvent();
         TriggerRandomEvent();
     }
 
     public void TriggerRandomEvent()
     {
         targetManager.DisableCurrentTarget();
-        
-        var eventKind = GetRandomEvent();
+
+        var eventKind = GetRandomEvent(_previousEvent);
+        _previousEvent = eventKind;
+
         switch (eventKind)
         {
             case EventKind.SpawnTarget:
@@ -43,10 +46,18 @@ public class GameEventManager : MonoBehaviour
         }
     }
 
-    private static EventKind GetRandomEvent()
+    private static EventKind GetRandomEvent(EventKind? previous = null)
     {
         var values = Enum.GetValues(typeof(EventKind));
-        return (EventKind)values.GetValue(Random.Range(0, values.Length));
+
+        // On ne veut pas invoquer plusieurs fois le même sort à la suite.
+        EventKind result;
+        do
+        {
+            result = (EventKind)values.GetValue(Random.Range(0, values.Length));
+        } while (result == previous && previous != EventKind.SpawnTarget);
+
+        return result;
     }
 
     private void TriggerShakingEvent()
@@ -56,10 +67,11 @@ public class GameEventManager : MonoBehaviour
             mascotAnimator.SetBool("isShaking", true);
         }
     }
-    
+
     private void TriggerSweatingEvent()
     {
         if (mascotAnimator != null)
-        {}
+        {
+        }
     }
 }
