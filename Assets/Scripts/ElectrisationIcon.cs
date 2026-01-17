@@ -30,20 +30,19 @@ public class ElectrisationIcon : MonoBehaviour
         if (_isTriggered) return;
 
         _isTriggered = true;
-        var rac = mascotAnimator.runtimeAnimatorController;
-        var duration = rac.animationClips.First(clip => clip.name == "electrisation").length;
-
-        mascotAnimator?.SetBool("isElectrised", true);
+        StartCoroutine(PlayAnimation());
         audioSource.Play();
-
-        StartCoroutine(PlayAnimation(duration));
     }
 
-    private IEnumerator PlayAnimation(float duration)
+    private IEnumerator PlayAnimation()
     {
+        mascotAnimator.SetBool("isElectrised", true);
+        var rac = mascotAnimator.runtimeAnimatorController;
+        var duration = rac.animationClips.First(clip => clip.name == "electrisation").length;
         yield return new WaitForSeconds(duration);
-        mascotAnimator?.SetBool("isShaking", false);
-        mascotAnimator?.SetBool("isElectrised", false);
+
+        mascotAnimator.SetBool("isShaking", false);
+        mascotAnimator.SetBool("isElectrised", false);
         _isTriggered = false;
 
         manager.TriggerRandomEvent();

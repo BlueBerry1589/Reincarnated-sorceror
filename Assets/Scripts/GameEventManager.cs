@@ -18,7 +18,6 @@ public class GameEventManager : MonoBehaviour
 
     private void Start()
     {
-        //TriggerShakingEvent();
         TriggerRandomEvent();
     }
 

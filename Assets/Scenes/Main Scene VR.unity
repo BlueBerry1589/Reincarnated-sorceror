@@ -177,6 +177,7 @@ MonoBehaviour:
   hitSource: {fileID: 33441899}
   painSource1: {fileID: 33441903}
   painSource2: {fileID: 33441902}
+  mascotAnimator: {fileID: 874533771}
 --- !u!82 &33441899
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3061,7 +3062,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 4d75540d0b45c9f47b6c89737bf44175, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -4645,6 +4646,7 @@ MonoBehaviour:
   hitSource: {fileID: 1661670275}
   painSource1: {fileID: 1661670277}
   painSource2: {fileID: 1661670276}
+  mascotAnimator: {fileID: 0}
 --- !u!82 &1661670275
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5178,6 +5180,7 @@ MonoBehaviour:
   hitSource: {fileID: 1751727877}
   painSource1: {fileID: 1751727879}
   painSource2: {fileID: 1751727878}
+  mascotAnimator: {fileID: 0}
 --- !u!54 &1751727875
 Rigidbody:
   m_ObjectHideFlags: 0

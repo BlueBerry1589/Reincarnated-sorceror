@@ -70,7 +70,8 @@ public class ResetToolToOrigin : MonoBehaviour
         transform.position = _startPosition;
         transform.rotation = _startRotation;
         
-        // Important sinon la baguette se met à rouler.
+        // Même si Unity affiche un avertissement, ces instructions restent importantes.
+        // Si one ne les applique pas, les outils rouleraient une fois lâchés.
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
 
