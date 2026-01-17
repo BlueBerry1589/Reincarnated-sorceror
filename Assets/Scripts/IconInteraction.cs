@@ -22,7 +22,7 @@ public class IconInteraction : MonoBehaviour
 
     private Outline _outline;
     // Pour éviter que le joueur déclenche le sort s'il est déjà en cours.
-    private bool _isTriggered;
+    public bool isTriggered { get; private set; }
 
     private void Awake()
     {
@@ -45,9 +45,9 @@ public class IconInteraction : MonoBehaviour
 
     private void OnActivation(ActivateEventArgs args)
     {
-        if (_isTriggered) return;
+        if (isTriggered) return;
 
-        _isTriggered = true;
+        isTriggered = true;
         StartCoroutine(PlayAnimation());
         manager.DisabledCurrentTarget();
         selectSource.Play();
@@ -65,7 +65,7 @@ public class IconInteraction : MonoBehaviour
         {
             mascotAnimator.SetBool(param.nameHash, false);
         }
-        _isTriggered = false;
+        isTriggered = false;
 
         manager.TriggerRandomEvent();
     }

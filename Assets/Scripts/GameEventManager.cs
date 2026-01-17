@@ -13,6 +13,7 @@ public class GameEventManager : MonoBehaviour
 
     [SerializeField] private TargetManager targetManager;
     [SerializeField] private Animator mascotAnimator;
+    [SerializeField] private AudioSource coughSource;
 
     private EventKind? _previousEvent;
 
@@ -71,6 +72,7 @@ public class GameEventManager : MonoBehaviour
 
     private void TriggerSweatingEvent()
     {
+        coughSource.Play();
         mascotAnimator.SetBool("isCoughing", true);
     }
 }
