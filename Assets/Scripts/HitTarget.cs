@@ -5,13 +5,16 @@
 
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource), typeof(Collider))]
+[RequireComponent(typeof(Collider))]
 public class HitTarget : MonoBehaviour
 {
     public Renderer targetRenderer;
     public GameEventManager manager;
 
-    private AudioSource _audioSource;
+    [SerializeField] private AudioSource hitSource;
+    [SerializeField] private AudioSource painSource1;
+    [SerializeField] private AudioSource painSource2;
+    
     private bool _isActive;
 
     public void SetActive(bool state)
@@ -21,17 +24,18 @@ public class HitTarget : MonoBehaviour
         targetRenderer.enabled = state;
     }
 
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (_isActive && other.CompareTag("Hammer"))
-        {
-            manager.TriggerRandomEvent();
-            _audioSource.Play();
-        }
+        if (!(_isActive && other.CompareTag("Hammer"))) return;
+        manager.TriggerRandomEvent();
+        hitSource.Play();
+        Invoke(nameof(PlayPainSound), 0.2f);
+    }
+
+    private void PlayPainSound()
+    {
+        var painSource = Random.value > 0.5f ? painSource1 : painSource2;
+        painSource.pitch = Random.Range(0.8f, 1.2f);
+        painSource.Play();
     }
 }
