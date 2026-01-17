@@ -3,17 +3,26 @@
  * Permet de sélectionner un sort.
  */
 
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(Outline), typeof(XRBaseInteractable), typeof(Image))]
-public class IconHoverColor : MonoBehaviour
+public class IconInteraction : MonoBehaviour
 {
     [SerializeField] private AudioSource hoverSource;
     [SerializeField] private AudioSource selectSource;
+    [SerializeField] private Animator mascotAnimator;
+    [SerializeField] private AudioSource effectSource;
+    [SerializeField] private GameEventManager manager;
+    [SerializeField] private string conditionName;
+    [SerializeField] private string animationName;
 
     private Outline _outline;
+    // Pour éviter que le joueur déclenche le sort s'il est déjà en cours.
+    private bool _isTriggered;
 
     private void Awake()
     {
@@ -36,6 +45,28 @@ public class IconHoverColor : MonoBehaviour
 
     private void OnActivation(ActivateEventArgs args)
     {
+        if (_isTriggered) return;
+
+        _isTriggered = true;
+        StartCoroutine(PlayAnimation());
+        manager.DisabledCurrentTarget();
         selectSource.Play();
+        effectSource.Play();
+    }
+    
+    private IEnumerator PlayAnimation()
+    {
+        mascotAnimator.SetBool(conditionName, true);
+        var rac = mascotAnimator.runtimeAnimatorController;
+        var duration = rac.animationClips.First(clip => clip.name == animationName).length;
+        yield return new WaitForSeconds(duration);
+
+        foreach (var param in mascotAnimator.parameters)
+        {
+            mascotAnimator.SetBool(param.nameHash, false);
+        }
+        _isTriggered = false;
+
+        manager.TriggerRandomEvent();
     }
 }

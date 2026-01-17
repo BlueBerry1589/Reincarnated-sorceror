@@ -21,6 +21,11 @@ public class GameEventManager : MonoBehaviour
         TriggerRandomEvent();
     }
 
+    public void DisabledCurrentTarget()
+    {
+        targetManager.DisableCurrentTarget();
+    }
+
     public void TriggerRandomEvent()
     {
         targetManager.DisableCurrentTarget();
@@ -61,16 +66,11 @@ public class GameEventManager : MonoBehaviour
 
     private void TriggerShakingEvent()
     {
-        if (mascotAnimator != null)
-        {
-            mascotAnimator.SetBool("isShaking", true);
-        }
+        mascotAnimator.SetBool("isShaking", true);
     }
 
     private void TriggerSweatingEvent()
     {
-        if (mascotAnimator != null)
-        {
-        }
+        mascotAnimator.SetBool("isCoughing", true);
     }
 }
