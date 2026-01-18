@@ -59,6 +59,9 @@ public class IconInteraction : MonoBehaviour
         if (manager.CoughSource.isPlaying)
         {
             manager.CoughSource.Stop();
+        } else if (manager.ShakeSource.isPlaying)
+        {
+            manager.ShakeSource.Stop();
         }
         mascotAnimator.SetBool(conditionName, true);
         var rac = mascotAnimator.runtimeAnimatorController;

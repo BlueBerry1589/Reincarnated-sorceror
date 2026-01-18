@@ -14,7 +14,9 @@ public class GameEventManager : MonoBehaviour
     [SerializeField] private TargetManager targetManager;
     [SerializeField] private Animator mascotAnimator;
     [SerializeField] private AudioSource coughSource;
+    [SerializeField] private AudioSource shakeSource;
     public AudioSource CoughSource => coughSource;
+    public AudioSource ShakeSource => shakeSource;
 
     private EventKind? _previousEvent;
 
@@ -69,6 +71,12 @@ public class GameEventManager : MonoBehaviour
     private void TriggerShakingEvent()
     {
         mascotAnimator.SetBool("isShaking", true);
+        Invoke(nameof(PlayShakingSound), 0.2f);
+    }
+
+    private void PlayShakingSound()
+    {
+        shakeSource.Play();
     }
 
     private void TriggerSweatingEvent()
