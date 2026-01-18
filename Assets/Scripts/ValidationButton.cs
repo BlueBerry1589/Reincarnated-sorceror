@@ -4,8 +4,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonValidation : MonoBehaviour
 {
-    private XRBaseInteractable _interactable;
+    [SerializeField] private GameObject hoverImage;
     private Image _image;
+    private XRBaseInteractable _interactable;
 
     private void Awake()
     {
@@ -13,11 +14,17 @@ public class ButtonValidation : MonoBehaviour
         _interactable = GetComponent<XRBaseInteractable>();
         _interactable.hoverEntered.AddListener(_ =>
         {
-            _image.color = Color.red;
+            var color = _image.color;
+            color.a = 0;
+            _image.color = color;
+            hoverImage.SetActive(true);
         });
-        _interactable.hoverEntered.AddListener(_ =>
+        _interactable.hoverExited.AddListener(_ =>
         {
-            _image.color = Color.white;
+            var color = _image.color;
+            color.a = 1;
+            _image.color = color;
+            hoverImage.SetActive(false);
         });
         _interactable.activated.AddListener(_ => IconInteraction.ValidateDrawing());
     }
