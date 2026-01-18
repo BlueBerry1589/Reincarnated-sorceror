@@ -19,10 +19,13 @@ public class IconInteraction : MonoBehaviour
     [SerializeField] private GameEventManager manager;
     [SerializeField] private string conditionName;
     [SerializeField] private string animationName;
+
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject kanji;
+    [SerializeField] private GameObject drawingSurface;
 
     private Outline _outline;
+
     // Pour éviter que le joueur déclenche le sort s'il est déjà en cours.
     public bool isTriggered { get; private set; }
 
@@ -58,26 +61,25 @@ public class IconInteraction : MonoBehaviour
 
         isTriggered = true;
         text.SetActive(false);
-        if (kanji != null)
-        {
-            kanji.SetActive(true);
-        }
+        kanji.SetActive(true);
 
         StartCoroutine(PlayAnimation());
         manager.DisabledCurrentTarget();
         selectSource.Play();
         effectSource.Play();
     }
-    
+
     private IEnumerator PlayAnimation()
     {
         if (manager.CoughSource.isPlaying)
         {
             manager.CoughSource.Stop();
-        } else if (manager.ShakeSource.isPlaying)
+        }
+        else if (manager.ShakeSource.isPlaying)
         {
             manager.ShakeSource.Stop();
         }
+
         mascotAnimator.SetBool(conditionName, true);
         var rac = mascotAnimator.runtimeAnimatorController;
         var duration = rac.animationClips.First(clip => clip.name == animationName).length;
@@ -87,8 +89,9 @@ public class IconInteraction : MonoBehaviour
         {
             mascotAnimator.SetBool(param.nameHash, false);
         }
-        isTriggered = false;
 
+        isTriggered = false;
+        kanji.SetActive(false);
         manager.TriggerRandomEvent();
     }
 }
