@@ -39,9 +39,14 @@ public class DrawMesh : MonoBehaviour
             new Vector3(+1, -1) * offset,
             new Vector3(+1, +1) * offset,
         };
-        var uv = new Vector2[4];
-        // Par défaut les éléments du tableau sont null, c'est pourquoi on fait appelle à cette méthode.
-        Array.Fill(uv, Vector2.zero);
+
+        Vector2[] uv =
+        {
+            new(0, 1),
+            new(0, 0),
+            new(1, 0),
+            new(1, 1)
+        };
 
         int[] triangles = { 0, 3, 1, 1, 3, 2 };
 
@@ -60,14 +65,14 @@ public class DrawMesh : MonoBehaviour
 
     private void InitializeDrawingTexture()
     {
-        _drawTexture = new Texture2D(k_TextureSide, 750);
+        _drawTexture = new Texture2D(k_TextureSide, k_TextureSide);
 
         var pixels = new Color[k_TextureSide * k_TextureSide];
-        Array.Fill(pixels, new Color(1, 1, 1, 0.5f));
+        Array.Fill(pixels, Color.white);
         _drawTexture.SetPixels(pixels);
         _drawTexture.Apply();
 
-        _material = new Material(Shader.Find("Unlit/Transparent"));
+        _material = new Material(Shader.Find("Unlit/Texture"));
         _material.mainTexture = _drawTexture;
         GetComponent<MeshRenderer>().material = _material;
     }
@@ -85,7 +90,7 @@ public class DrawMesh : MonoBehaviour
         _cursor.transform.localScale = Vector3.one * cursorSize;
         _cursorRenderer = _cursor.GetComponent<MeshRenderer>();
         _cursorRenderer.enabled = false;
-        
+
         var cursorCollider = _cursor.GetComponent<Collider>();
         if (cursorCollider != null)
         {
@@ -103,7 +108,7 @@ public class DrawMesh : MonoBehaviour
             _isDrawing = false;
             return;
         }
-        
+
         var ray = new Ray(rayInteractor.transform.position, rayInteractor.transform.forward);
         if (!Physics.Raycast(ray, out var hit) || hit.collider.gameObject != gameObject)
         {
@@ -111,7 +116,7 @@ public class DrawMesh : MonoBehaviour
             _isDrawing = false;
             return;
         }
-        
+
         _cursorRenderer.enabled = true;
 
         _cursor.transform.position = hit.point + hit.normal * 0.02f;
@@ -145,14 +150,15 @@ public class DrawMesh : MonoBehaviour
 
     private void DrawLine(Vector2 from, Vector2 to)
     {
-        var steps = (int)Vector2.Distance(from, to);
-        for (var i = 0; i < steps; ++i)
+        var steps = Mathf.Max(1, (int)Vector2.Distance(from, to));
+        for (var i = 0; i <= steps; ++i)
         {
             var t = i / (float)steps;
             var point = Vector2.Lerp(from, to, t);
             DrawBrush((int)point.x, (int)point.y);
-            _drawTexture.Apply();
         }
+
+        _drawTexture.Apply();
     }
 
     private void DrawBrush(int centerX, int centerY)
@@ -162,7 +168,7 @@ public class DrawMesh : MonoBehaviour
         {
             for (var y = -brushSize; y <= brushSize; y++)
             {
-                if (x * x + y * y > brushSize * brushSize) continue; // Brosse circulaire
+                if (x * x + y * y > brushSize * brushSize) continue;
                 var pixelX = centerX + x;
                 var pixelY = centerY + y;
 
