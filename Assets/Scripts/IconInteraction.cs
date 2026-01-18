@@ -19,6 +19,8 @@ public class IconInteraction : MonoBehaviour
     [SerializeField] private GameEventManager manager;
     [SerializeField] private string conditionName;
     [SerializeField] private string animationName;
+    [SerializeField] private GameObject text;
+    [SerializeField] private GameObject kanji;
 
     private Outline _outline;
     // Pour éviter que le joueur déclenche le sort s'il est déjà en cours.
@@ -31,7 +33,7 @@ public class IconInteraction : MonoBehaviour
 
         var interactable = GetComponent<XRBaseInteractable>();
         interactable.hoverEntered.AddListener(OnHoverEnter);
-        interactable.hoverExited.AddListener(_ => _outline.enabled = false);
+        interactable.hoverExited.AddListener(OnHoverExit);
 
         // activated = quand on appuie sur la gâchette
         interactable.activated.AddListener(OnActivation);
@@ -40,7 +42,14 @@ public class IconInteraction : MonoBehaviour
     private void OnHoverEnter(HoverEnterEventArgs args)
     {
         hoverSource.Play();
+        text.SetActive(true);
         _outline.enabled = true;
+    }
+
+    private void OnHoverExit(HoverExitEventArgs args)
+    {
+        text.SetActive(false);
+        _outline.enabled = false;
     }
 
     private void OnActivation(ActivateEventArgs args)
@@ -48,6 +57,12 @@ public class IconInteraction : MonoBehaviour
         if (isTriggered) return;
 
         isTriggered = true;
+        text.SetActive(false);
+        if (kanji != null)
+        {
+            kanji.SetActive(true);
+        }
+
         StartCoroutine(PlayAnimation());
         manager.DisabledCurrentTarget();
         selectSource.Play();
