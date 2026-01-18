@@ -7,7 +7,11 @@ Les builds ainsi que le rapport sont trouvables dans le [release](https://github
 
 ## Credits
 
-Icône d'électrisation par [stickerfolio - flaticon](https://www.flaticon.com/free-stickers/electric-shock).
+Icône d'électrisation par stickerfolio, https://www.flaticon.com/free-stickers/electric-shock.
+
+Modèles de baguette par Frost Forged, https://assetstore.unity.com/packages/3d/props/weapons/3d-items-free-wand-pack-46225.
+
+Modèles de cabane, table et lit par Gregory Seguru, https://assetstore.unity.com/packages/3d/environments/cabin-environment-98014.
 
 Bruitage de sudation par Bart K., sous license CC-BY-SA 3.0, https://opengameart.org/content/spell-4-fire.
 
