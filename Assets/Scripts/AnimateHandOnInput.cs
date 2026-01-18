@@ -1,5 +1,6 @@
 /*
  * AnimateHandOnInput.cs
+ *
  * Permet d'adapter la position des doigts (du moins la progression des animations) du joueur lors d'un pincement ou
  * d'un grab.
  */

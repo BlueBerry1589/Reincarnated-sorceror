@@ -1,3 +1,9 @@
+/*
+ * GameEventManager.cs
+ *
+ * Permet de générer un évènement (symptôme) aléatoire (un à la fois).
+ */
+
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;

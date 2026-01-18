@@ -1,6 +1,7 @@
 /*
  * ShowCenterOfMass.cs
- * Permet d'afficher dans l'éditeur le centre de masse du marteau
+ *
+ * Permet d'afficher le centre de masse du marteau dans l'éditeur.
  */
 
 using UnityEngine;

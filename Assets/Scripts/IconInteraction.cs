@@ -1,6 +1,8 @@
 /*
  * IconInteraction.cs
- * Permet de sélectionner un sort.
+ *
+ * Gère la page de sorts, la sélection, l'affichage de la zone de dessin et
+ * l'exécution des sorts.
  */
 
 using System.Collections;

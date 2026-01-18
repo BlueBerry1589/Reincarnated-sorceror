@@ -1,6 +1,7 @@
 /*
  * TargetManager.cs
- * Permet d'instancier une cible différente et aléatoire.
+ *
+ * Permet d'instancier une cible (une marque viollet) différente et aléatoire.
  */
 
 using System.Collections.Generic;
@@ -41,8 +42,8 @@ public class TargetManager : MonoBehaviour
         {
             randomIndex = Random.Range(0, targets.Count);
         } while (randomIndex == _index);
-        
-        
+
+
         _index = randomIndex;
         _currentTarget = targets[_index];
         _currentTarget.SetActive(true);

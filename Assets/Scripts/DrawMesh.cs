@@ -1,3 +1,10 @@
+/*
+ * DrawMesh.cs
+ *
+ * Permet de contrôler la surface de dessin utilisé quand on
+ * sélectionne un sort.
+ */
+
 using System;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;

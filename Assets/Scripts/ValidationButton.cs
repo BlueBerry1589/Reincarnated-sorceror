@@ -1,3 +1,9 @@
+/*
+ * ButtonValidation.cs
+ *
+ * Gère les interactions du bouton de validation.
+ */
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -14,6 +20,8 @@ public class ButtonValidation : MonoBehaviour
         _interactable = GetComponent<XRBaseInteractable>();
         _interactable.hoverEntered.AddListener(_ =>
         {
+            // Puisque _image.color est une référence temporaire, on ne peut pas
+            // écrire _image.color.a = 0.
             var color = _image.color;
             color.a = 0;
             _image.color = color;

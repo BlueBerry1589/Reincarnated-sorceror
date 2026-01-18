@@ -1,6 +1,7 @@
 /*
  * HitTarget.cs
- * Gère la couleur, les sons et les collisions entre d'une cible par rapport au marteau.
+ *
+ * Gère la couleur, les sons et les collisions d'une cible par rapport au marteau.
  */
 
 using System.Collections;

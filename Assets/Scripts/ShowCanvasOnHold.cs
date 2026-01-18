@@ -1,5 +1,6 @@
 /*
  * ShowCanvasOnHold.cs
+ *
  * Permet d'afficher le canvas (la page de sorts) lorsqu'on a la baguette en main.
  */
 

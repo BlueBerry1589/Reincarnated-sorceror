@@ -1,3 +1,9 @@
+/*
+ * ChangeScene.cs
+ *
+ * Utilisé par le bouton Jouer du menu principal pour changer de scène.
+ */
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
