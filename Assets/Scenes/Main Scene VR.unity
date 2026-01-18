@@ -724,7 +724,7 @@ MonoBehaviour:
   kanji: {fileID: 1545120251}
   drawingSurface: {fileID: 1558059410}
   counter: {fileID: 918547919}
-  validationButton: {fileID: 75898236}
+  validationButton: {fileID: 712733335}
 --- !u!114 &75898242
 MonoBehaviour:
   m_ObjectHideFlags: 0

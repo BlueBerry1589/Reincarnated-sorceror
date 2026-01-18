@@ -102,6 +102,7 @@ public class IconInteraction : MonoBehaviour
         // ...
         yield return new WaitUntil(() => isDrawingValidated);
 
+        drawingSurface.SetActive(false);
         validationButton.SetActive(false);
         _isInDrawingPart = false;
         manager.DisabledCurrentTarget();
