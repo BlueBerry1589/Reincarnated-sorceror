@@ -56,6 +56,10 @@ public class IconInteraction : MonoBehaviour
     
     private IEnumerator PlayAnimation()
     {
+        if (manager.CoughSource.isPlaying)
+        {
+            manager.CoughSource.Stop();
+        }
         mascotAnimator.SetBool(conditionName, true);
         var rac = mascotAnimator.runtimeAnimatorController;
         var duration = rac.animationClips.First(clip => clip.name == animationName).length;
