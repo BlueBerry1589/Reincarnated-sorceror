@@ -5,11 +5,12 @@
 
 using System.Collections;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(Outline), typeof(XRBaseInteractable), typeof(Image))]
+[RequireComponent(typeof(Outline), typeof(XRBaseInteractable))]
 public class IconInteraction : MonoBehaviour
 {
     [SerializeField] private AudioSource hoverSource;
@@ -23,11 +24,24 @@ public class IconInteraction : MonoBehaviour
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject kanji;
     [SerializeField] private GameObject drawingSurface;
+    [SerializeField] private TextMeshProUGUI counter;
+
+    [SerializeField] private GameObject validationButton;
 
     private Outline _outline;
 
-    // Pour éviter que le joueur déclenche le sort s'il est déjà en cours.
-    public bool isTriggered { get; private set; }
+    // Pour éviter que le joueur déclenche un sort si un est déjà en cours.
+    public static bool isTriggered { get; private set; }
+    public static bool isDrawingValidated { get; private set; }
+    private static bool _isInDrawingPart;
+
+    public static void ValidateDrawing()
+    {
+        if (_isInDrawingPart)
+        {
+            isDrawingValidated = true;
+        }
+    }
 
     private void Awake()
     {
@@ -44,6 +58,7 @@ public class IconInteraction : MonoBehaviour
 
     private void OnHoverEnter(HoverEnterEventArgs args)
     {
+        if (isTriggered) return;
         hoverSource.Play();
         text.SetActive(true);
         _outline.enabled = true;
@@ -57,20 +72,41 @@ public class IconInteraction : MonoBehaviour
 
     private void OnActivation(ActivateEventArgs args)
     {
-        if (isTriggered) return;
-
-        isTriggered = true;
-        text.SetActive(false);
-        kanji.SetActive(true);
-
-        StartCoroutine(PlayAnimation());
-        manager.DisabledCurrentTarget();
-        selectSource.Play();
-        effectSource.Play();
+        if (!isTriggered)
+        {
+            StartCoroutine(PlayAnimation());
+        }
     }
 
     private IEnumerator PlayAnimation()
     {
+        selectSource.Play();
+        isTriggered = true;
+        text.SetActive(false);
+        kanji.SetActive(true);
+        counter.gameObject.SetActive(true);
+
+        for (var i = 3; i > 0; --i)
+        {
+            counter.text = i.ToString();
+            yield return new WaitForSeconds(1);
+            selectSource.Play();
+        }
+
+        _isInDrawingPart = true;
+        counter.gameObject.SetActive(false);
+        kanji.SetActive(false);
+        drawingSurface.SetActive(true);
+        validationButton.SetActive(true);
+
+        // ...
+        yield return new WaitUntil(() => isDrawingValidated);
+
+        validationButton.SetActive(false);
+        _isInDrawingPart = false;
+        manager.DisabledCurrentTarget();
+        effectSource.Play();
+
         if (manager.CoughSource.isPlaying)
         {
             manager.CoughSource.Stop();
@@ -91,7 +127,7 @@ public class IconInteraction : MonoBehaviour
         }
 
         isTriggered = false;
-        kanji.SetActive(false);
+        isDrawingValidated = false;
         manager.TriggerRandomEvent();
     }
 }

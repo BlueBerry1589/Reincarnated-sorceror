@@ -37,7 +37,7 @@ public class ShowCanvasOnHold : MonoBehaviour
 
     private IEnumerator HideCanvas()
     {
-        yield return new WaitUntil(() => !(electrisationSpell.isTriggered || sudationSpell.isTriggered));
+        yield return new WaitUntil(() => !IconInteraction.isTriggered);
         canvas.SetActive(false);
     }
 }
