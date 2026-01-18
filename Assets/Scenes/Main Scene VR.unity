@@ -1591,8 +1591,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Comment gu\xE9rir un patient ?\r\n\r\nS'il a une marque rouge, la frapper
-    avec unmarteau.\r\n\r\nSinon prendre la baguette et appliquer un sort adapt\xE9"
+  m_text: "Comment gu\xE9rir un patient ?\r\n\r\nS'il a une marque violette, la frapper
+    avec unmarteau.\r\n\r\nSinon prendre la baguette et appliquer un sort adapt\xE9."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4811,7 +4811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
